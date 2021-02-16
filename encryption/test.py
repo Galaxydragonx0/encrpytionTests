@@ -1,10 +1,18 @@
-import Crypto
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import AES, PKCS1_OAEP
-from Crypto import Random
-from flask import send_file
 
-srcData = 'To be, or not to be - that is the question.'.encode()
+import sys
+import Crypto
+from Crypto.Hash import SHA256
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import AES
+# , PKCS1_OAEP
+from Crypto import Random
+from base64 import b64decode
+
+# x = [True]*(sys.int)
+
+
+srcData = 'To be, or not to be - that is the question.'
+srcData = str.encode(srcData)
 print("This is the data\n" + srcData.decode())
 
 
@@ -14,7 +22,7 @@ key = RSA.generate(1024)
 
 #### PUBLIC KEY ####
 # Public Key to be sent to the Client. -> exported to a PEM File for now
-
+"""
 publicKey = key.publickey()
 publicKey = publicKey.exportKey("PEM")
 
@@ -47,6 +55,22 @@ private_key.write(privateKey.decode()) # decode converts the bytes to a string #
 private_key.close()
 
 
-print('This is the private key\n\n', privateKey)
+"""
+
+# private_key = RSA.importKey(open('privatekey.pem').read())
+
+
+cipher = RSA.importKey(open('privatekey.pem').read())
+print("this is new cipher", cipher)
+
+
+encryptedText = open("message.txt", encoding='utf8').read()
+encryptText = str.encode(encryptedText, 'utf-8')
+print(type(encryptText))
+
+
+decrypted_message = cipher.decrypt(b64decode(encryptText))
+text = (decrypted_message.decode('latin-1'))
+print('This is the message \n\n', text)
 
 
