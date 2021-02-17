@@ -20,7 +20,7 @@ print("This is the data\n" + srcData.decode())
 """
 """
 # generates the RSA keypair by the number of Bytes
-key = RSA.generate(1024)
+key = RSA.generate(2048)
 
 
 #### PUBLIC KEY ####
@@ -65,8 +65,8 @@ privateCipher = PKCS1_OAEP.new(privkey)
 message = privateCipher.decrypt(encryptedData)
 
 print('this is the decrypted messaage', message.decode())
-"""
 
+"""
 #### Decrpyting from CLIENT ####
 
 # Treads private key from file
