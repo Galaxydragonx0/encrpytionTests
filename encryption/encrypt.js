@@ -1,6 +1,7 @@
 var forge = require('node-forge');
 const fs = require('fs');
-var pubkey = fs.readFileSync("publickey.pem", 'utf8')
+
+var pubkey = fs.readFileSync ("C:/Users/USER/Desktop/encrpytionTests/encryption/publickey.pem", 'utf8')
 
 var publicKey = forge.pki.publicKeyFromPem(pubkey);
 
@@ -25,5 +26,5 @@ var encryptedMessage = base64;
 //     mgf1: forge.mgf1.create()
 // }
 
-fs.writeFileSync('message.txt', encryptedMessage);
+fs.writeFileSync('C:/Users/USER/Desktop/encrpytionTests/encryption/message.txt', encryptedMessage);
 
