@@ -1,5 +1,5 @@
 # encrpytionTests
 
-Need to install pycryptodome or pycrpto
+Need to install pycryptodome
 
 pip install pycryptodome
