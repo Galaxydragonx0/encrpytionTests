@@ -1,4 +1,3 @@
-
 import sys
 import Crypto
 from Crypto.Hash import SHA256
@@ -6,7 +5,7 @@ from Crypto.PublicKey import RSA
 from Crypto.Cipher import AES, PKCS1_OAEP
 #
 from Crypto import Random
-from base64 import b64decode
+from base64 import b64decode, b64encode
 
 # x = [True]*(sys.int)
 
@@ -18,71 +17,122 @@ srcData = srcData.encode()
 srcData = str.encode(srcData)
 print("This is the data\n" + srcData.decode())
 """
+
+
+def geneerateKeys():
+    # generates the RSA keypair by the number of Bytes
+    key = RSA.generate(2048)
+    return key
+
+
+def savePublicKey(key):
+    #### PUBLIC KEY ####
+    # Public Key to be sent to the Client. -> exported to a PEM File for now
+    publicKey = key.publickey()
+    publicKey = publicKey.exportKey()
+
+    # print('This is the public key\n', publicKey)
+
+    # writing to a pem file
+    public_key = open("publickey.pem", "w")
+    public_key.write(publicKey.decode())  # decode converts the bytes to a string #
+    public_key.close()
+
+
+def savePrivateKey(key):
+    ####  PRIVATE KEY ####
+    privateKey = key.exportKey()
+
+    # print('This is the public key\n', privateKey)
+    # writing to a pem file
+    private_key = open("privatekey.pem", "w")
+    private_key.write(privateKey.decode())  # decode converts the bytes to a string #
+    private_key.close()
+
+
+# # generates the RSA keypair by the number of Bytes
+# key = RSA.generate(2048)
+
+def encryptServerData(publicKey, srcData):
+    # ENCRYPTS THE PLAINTEXT WITH PUBLIC KEY
+    cipher_rsa = PKCS1_OAEP.new(publicKey)
+    encryptedData = cipher_rsa.encrypt(srcData)
+
+    # WE CAN SEND THE PEM FILE OVER TO THE CLIENT
+    # print("This is the Encrypted Data", encryptedData)
+
+    return encryptedData
+
+
+def readServerPublicKey():
+    # NEEDS TO READ THIS FROM FILE IN ORDER TO ENCRYPT
+    publicKey = RSA.importKey(open("publickey.pem").read())
+    # print("this is the function server pubkey: ", publicKey)
+    # pubkey = PKCS1_OAEP.new(key)  # key is the original pair key generated
+    return publicKey
+    # print("This is the pubkey from file", pubkey)
+
+
+def readClientPublicKey():
+    client_publicKey = RSA.importKey(open("clientpublickey.pem").read())
+    # print("this is the function client pubkey: ", client_publicKey)
+    return client_publicKey
+
+def decryptMessage(encryptedData):
+    # this reads the private key and decrypts the incoming message
+    privkey = RSA.importKey(open('privatekey.pem').read())
+    privateCipher = PKCS1_OAEP.new(privkey)
+    message = privateCipher.decrypt(encryptedData)
+
+    print('this is the decrypted messaage', message.decode())
+
+def readClientData():
+    # reads the message from the client in the text file
+    encryptedText = open("message.txt").read()
+    # checks to see if it is a bytes array
+    print(type(encryptedText))
+
+    # since message in forge was encoded in b64 we have to encode the string message
+    # and then decode it from b64
+    b64_decrypted_message = b64decode(encryptedText.encode())
+    return b64_decrypted_message
+
+def encodeString(str):
+    return str.encode('utf-8')
+
+def saveToText(text):
+    message = open("server_message.txt", "w")
+    message.write(text)
+    message.close()
+
+def main():
+    # key = geneerateKeys()
+    # savePublicKey(key)
+    # savePrivateKey(key)
+    # pubkey = readServerPublicKey()
+    # print("this is the read public key: ", pubkey)
+    # encrypted = encryptServerData(pubkey, encodeString("to be or not to be"))
+    client_pubkey = readClientPublicKey()
+    encrypted = encryptServerData(client_pubkey, encodeString("to be or not to be"))
+
+    print(type(encrypted))
+    b64_encrypted = b64encode(encrypted)
+    print((b64_encrypted.decode()))
+    saveToText(b64_encrypted.decode())
+
+    ### save data to text file
+
+    # encrypted = readClientData()
+    # decryptMessage(encrypted)
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+
 """
-# generates the RSA keypair by the number of Bytes
-key = RSA.generate(2048)
-
-
-#### PUBLIC KEY ####
-# Public Key to be sent to the Client. -> exported to a PEM File for now
-
-publicKey = key.publickey()
-publicKey = publicKey.exportKey()
-
-print('This is the public key\n', publicKey)
-
-# writing to a pem file
-public_key = open("publickey.pem", "wb")
-public_key.write(publicKey) # decode converts the bytes to a string #
-public_key.close()
-
-# NEEDS TO READ THIS FROM FILE IN ORDER TO ENCRYPT
-publicKey = RSA.importKey(open("publickey.pem").read())
-print(type(publicKey))
-pubkey = PKCS1_OAEP.new(key)
-# print("This is the pubkey from file", pubkey)
-
-
-# ENCRYPTS THE PLAINTEXT WITH PUBLIC KEY
-cipher_rsa = PKCS1_OAEP.new(publicKey)
-encryptedData = cipher_rsa.encrypt(srcData)
-
-# WE CAN SEND THE PEM FILE OVER TO THE CLIENT
-print("This is the Encrypted Data", encryptedData)
-
-
-
-####  PRIVATE KEY ####
-privateKey = key.exportKey()
-
-# writing to a pem file
-private_key = open("privatekey.pem", "w")
-private_key.write(privateKey.decode()) # decode converts the bytes to a string #
-private_key.close()
-
-privkey = RSA.importKey(open('privatekey.pem').read())
-privateCipher = PKCS1_OAEP.new(privkey)
-message = privateCipher.decrypt(encryptedData)
-
-print('this is the decrypted messaage', message.decode())
-
-"""
-#### Decrpyting from CLIENT ####
-
-# Treads private key from file
-privkey = RSA.importKey(open('privatekey.pem').read())
-# creates a new cipher of type PKCS!
-privateCipher = PKCS1_OAEP.new(privkey)
-
-# reads the message from the client in the text file
-encryptedText = open("message.txt").read()
-# checks to see if it is a bytes array
-print(type(encryptedText))
-
-# since message in forge was encodeed in b64 we have to encode the string message
-# and then decode it from b64
-b64_decrypted_message = b64decode(encryptedText.encode())
-
 # cipher.decrypt requires a byte array so we use this to ensure it is bytes
 print(type(b64_decrypted_message))
 
@@ -91,5 +141,4 @@ decryptedMesasge = privateCipher.decrypt(b64_decrypted_message)
 
 # outputs the message from the client
 print('This is the message \n\n', decryptedMesasge.decode())
-
-
+"""
