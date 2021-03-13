@@ -3,8 +3,7 @@ import Crypto
 from Crypto.Hash import SHA256
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import AES, PKCS1_OAEP
-#
-from Crypto import Random
+
 from base64 import b64decode, b64encode
 
 # x = [True]*(sys.int)
