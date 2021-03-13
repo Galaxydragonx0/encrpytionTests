@@ -106,24 +106,43 @@ def saveToText(text):
     message.close()
 
 def main():
+
+    # SERVER -> CLIENT -> SERVER  ENCRYPTION/DECRYPTION
+
+    # key pair generation
     # key = geneerateKeys()
+
+    # saves the public and private keys to a pem for transfer and later use
     # savePublicKey(key)
     # savePrivateKey(key)
+
+    # reads the encrypted text from the client
+    # encrypted = readClientData()
+
+    # reads the private key from the pem file then decrypts the message accordingly
+    # decryptMessage(encrypted)
+
+    # Testing in server encryption -> it works
     # pubkey = readServerPublicKey()
     # print("this is the read public key: ", pubkey)
     # encrypted = encryptServerData(pubkey, encodeString("to be or not to be"))
+
+
+    # CLIENT -> SERVER -> CLIENT ENCRYPTION DECRYPTION
+    # reads the public key from the client
     client_pubkey = readClientPublicKey()
+
+    # uses the client public key to encrypt a message of our choice
     encrypted = encryptServerData(client_pubkey, encodeString("to be or not to be"))
 
-    print(type(encrypted))
+    # base 64 encryption is needed as to save to a text file to save the message as a string -> makes it easier to decrypt
     b64_encrypted = b64encode(encrypted)
-    print((b64_encrypted.decode()))
+
+    # saves the decoded (string) base64 encoded message to a txt file
     saveToText(b64_encrypted.decode())
 
-    ### save data to text file
 
-    # encrypted = readClientData()
-    # decryptMessage(encrypted)
+
 
 if __name__ == "__main__":
     main()
@@ -132,13 +151,3 @@ if __name__ == "__main__":
 
 
 
-"""
-# cipher.decrypt requires a byte array so we use this to ensure it is bytes
-print(type(b64_decrypted_message))
-
-# we decrypt the message with the cipher from the private key
-decryptedMesasge = privateCipher.decrypt(b64_decrypted_message)
-
-# outputs the message from the client
-print('This is the message \n\n', decryptedMesasge.decode())
-"""
