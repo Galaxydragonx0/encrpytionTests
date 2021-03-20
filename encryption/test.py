@@ -106,38 +106,38 @@ def saveToText(text):
 
 def main():
 
-    # SERVER -> CLIENT -> SERVER  ENCRYPTION/DECRYPTION
+    ## SERVER -> CLIENT -> SERVER  ENCRYPTION/DECRYPTION
 
     # key pair generation
     # key = geneerateKeys()
 
-    # saves the public and private keys to a pem for transfer and later use
+    ## saves the public and private keys to a pem for transfer and later use
     # savePublicKey(key)
     # savePrivateKey(key)
 
-    # reads the encrypted text from the client
+    ## reads the encrypted text from the client
     # encrypted = readClientData()
 
-    # reads the private key from the pem file then decrypts the message accordingly
+    ## reads the private key from the pem file then decrypts the message accordingly
     # decryptMessage(encrypted)
 
-    # Testing in server encryption -> it works
+    ## Testing in server encryption -> it works
     # pubkey = readServerPublicKey()
     # print("this is the read public key: ", pubkey)
     # encrypted = encryptServerData(pubkey, encodeString("to be or not to be"))
 
 
-    # CLIENT -> SERVER -> CLIENT ENCRYPTION DECRYPTION
-    # reads the public key from the client
+    ## CLIENT -> SERVER -> CLIENT ENCRYPTION DECRYPTION
+    ## reads the public key from the client
     client_pubkey = readClientPublicKey()
 
-    # uses the client public key to encrypt a message of our choice
+    ## uses the client public key to encrypt a message of our choice
     encrypted = encryptServerData(client_pubkey, encodeString("to be or not to be"))
 
-    # base 64 encryption is needed as to save to a text file to save the message as a string -> makes it easier to decrypt
+    ## base 64 encryption is needed as to save to a text file to save the message as a string -> makes it easier to decrypt
     b64_encrypted = b64encode(encrypted)
 
-    # saves the decoded (string) base64 encoded message to a txt file
+    ## saves the decoded (string) base64 encoded message to a txt file
     saveToText(b64_encrypted.decode())
 
 
