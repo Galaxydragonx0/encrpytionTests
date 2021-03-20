@@ -1,9 +1,15 @@
 # encrpytionTests
 
-Need to install pycryptodome
-
 pip install pycryptodome
 
+npm install -g browserify
+
+npm install uniq
+
+npm install brfs
+
+Use brfs to generate the bundle needed to use in the browser:
+ browserify -t brfs [your_js_file] > [output_js_file]
 
 For Server to Client Encryption:
 
