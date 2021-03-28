@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as forge from 'node-forge'
 import * as fs from 'fs'
+import { FormControl, FormGroup } from '@angular/forms';
+import { MessagingService } from '../services/messaging.service';
 
 @Component({
   selector: 'app-home',
@@ -9,97 +11,113 @@ import * as fs from 'fs'
 })
 export class HomePage implements OnInit {
 
-  constructor() {}
+  message : FormGroup;
+  pubkey : any;
+  constructor(private key: MessagingService) {}
 
-  generateKeyPair(){
-    // var fs = require('fs');
+  ngOnInit() {
 
-    var pubkey = fs.readFileSync ("C:/Users/USER/Desktop/encrpytionTests/encryption/publickey.pem", 'utf8')
-    console.log(pubkey)
+    this.message = new FormGroup({
+      'message' : new FormControl(null)
+    })
 
-    // reader.readAsText("C:/Users/USER/Desktop/encrpytionTests/encryption/publickey.pem", 'utf8');
-    var keys = forge.pki.rsa.generateKeyPair(2048);
-    console.log(keys.publicKey);
+    this.key.savePublicKey().subscribe(response => {
+      this.pubkey = response
+    }, error => {});
+  }
+
+
+
+  //SERVER -> CLIENT -> SERVER  ENCRYPTION/DECRYPTION
+
+  getPublicKey() {
+
+    // reads public key from backend
+
+    //  the service should store the public key in the LocalStorage or the Session Storage
+    var pubkey  = localStorage.getItem('publickey');
+
+
+    // var pubkey = fs.readFileSync ("C:/Users/USER/Desktop/encrpytionTests/encryption/publickey.pem", 'utf8')
+
+    //extracts public key
+    var publicKey = forge.pki.publicKeyFromPem(pubkey);
+
+    return publicKey;
+  }
+
+
+
+  encryptUserMessage(message) {
+    //messaage.target.value
+    var secretMessage = "Hello World";
+    //encode message to bytes
+    secretMessage = forge.util.encodeUtf8(secretMessage);
+
+
+    var publicKey = this.getPublicKey();
+    //encrypt the message with the publickey
+    var encrypted = publicKey.encrypt(secretMessage, "RSA-OAEP");
+
+
+    // encrypt the already encrypted message in base 64
+    var base64 = forge.util.encode64(encrypted);
+
+    var encryptedMessage = base64;
+
+    // writes base64 encrypted message to txt file
+    fs.writeFileSync('C:/Users/USER/Desktop/encrpytionTests/encryption/message.txt', encryptedMessage);
 
   }
 
- 
 
-  ngOnInit(){
-     this.generateKeyPair();
+  onSubmit(){
+    console.log(this.message.controls.message.value);
   }
 
+
+
+
+
+  // CLIENT -> SERVER -> CLIENT ENCRYPTION/DECRYPTION
 
   /*
-
-//SERVER -> CLIENT -> SERVER  ENCRYPTION/DECRYPTION
-
-// reads public key from backend 
-var pubkey = fs.readFileSync ("C:/Users/USER/Desktop/encrpytionTests/encryption/publickey.pem", 'utf8')
-
-//extracts public key 
-var publicKey = forge.pki.publicKeyFromPem(pubkey);
+  //KEY PAIR GENERATION
+  var keys = forge.pki.rsa.generateKeyPair(2048);
 
 
-var secretMessage = "Hello World";
-//encode message to bytes 
-secretMessage = forge.util.encodeUtf8(secretMessage);
+  // saves public and private keys to variables
+  var clientPublicKey = keys.publicKey;
+  var clientPrivateKey = keys.privateKey;
 
-//encrypt the message with the publickey 
-var encrypted = publicKey.encrypt(secretMessage, "RSA-OAEP");
+  // saves public and private keys to pem
+  fs.writeFileSync("C:/Users/USER/Desktop/encrpytionTests/encryption/clientpublickey.pem",forge.pki.publicKeyToPem(clientPublicKey),'utf8');
+  fs.writeFileSync("C:/Users/USER/Desktop/encrpytionTests/encryption/clientprivatekey.pem",forge.pki.privateKeyToPem(clientPrivateKey),'utf8')
+  */
 
+  /*
+  //READ THE PRIVATE KEY
+  var privkey = fs.readFileSync ("C:/Users/USER/Desktop/encrpytionTests/encryption/clientprivatekey.pem",'utf8');
 
-// encrypt the already encrypted message in base 64
-var base64 = forge.util.encode64(encrypted);
+  var privateKey = forge.pki.privateKeyFromPem(privkey);
 
-var encryptedMessage = base64;
+  // READ THE MESSAGE FROM THE TEXT (NONE BYTES ARRAY IN BASE64 => STRING)
+  var message = fs.readFileSync("C:/Users/USER/Desktop/encrpytionTests/encryption/server_message.txt",'utf8');
 
-// writes base64 encrypted message to txt file
-fs.writeFileSync('C:/Users/USER/Desktop/encrpytionTests/encryption/message.txt', encryptedMessage);
-*/
+  console.log(message);
 
+  //DECODE THE MESSAGE FROM BAS64
+  var encryptedMessage = forge.util.decode64(message);
 
-
-
-// CLIENT -> SERVER -> CLIENT ENCRYPTION/DECRYPTION
-
-/*
-//KEY PAIR GENERATION 
-var keys = forge.pki.rsa.generateKeyPair(2048);
-
-
-// saves public and private keys to variables
-var clientPublicKey = keys.publicKey;
-var clientPrivateKey = keys.privateKey;
-
-// saves public and private keys to pem 
-fs.writeFileSync("C:/Users/USER/Desktop/encrpytionTests/encryption/clientpublickey.pem",forge.pki.publicKeyToPem(clientPublicKey),'utf8');
-fs.writeFileSync("C:/Users/USER/Desktop/encrpytionTests/encryption/clientprivatekey.pem",forge.pki.privateKeyToPem(clientPrivateKey),'utf8')
-*/
-
-/*
-//READ THE PRIVATE KEY 
-var privkey = fs.readFileSync ("C:/Users/USER/Desktop/encrpytionTests/encryption/clientprivatekey.pem",'utf8');
-
-var privateKey = forge.pki.privateKeyFromPem(privkey);
-
-// READ THE MESSAGE FROM THE TEXT (NONE BYTES ARRAY IN BASE64 => STRING)
-var message = fs.readFileSync("C:/Users/USER/Desktop/encrpytionTests/encryption/server_message.txt",'utf8');
-
-console.log(message);
-
-//DECODE THE MESSAGE FROM BAS64
-var encryptedMessage = forge.util.decode64(message);
-
-var serverMessage = forge.util.decodeUtf8(privateKey.decrypt(encryptedMessage, 'RSA-OAEP', {
-    md: forge.md.sha1.create(),
-    mgf1: {
-        md: forge.md.sha1.create()
-    }
-}));
+  var serverMessage = forge.util.decodeUtf8(privateKey.decrypt(encryptedMessage, 'RSA-OAEP', {
+      md: forge.md.sha1.create(),
+      mgf1: {
+          md: forge.md.sha1.create()
+      }
+  }));
 
 
-console.log("this is the final message:" + serverMessage);
+  console.log("this is the final message:" + serverMessage);
 
-*/
+  */
 }
