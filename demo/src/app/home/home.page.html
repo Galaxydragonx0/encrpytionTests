@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      SWARNet Message Board
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,9 +10,7 @@
 <form  [formGroup]='message' (ngSubmit)='onSubmit()'>
 
 
-  <ion-textarea
-  formControlName='message'
-  ></ion-textarea>
+  <ion-textarea formControlName='message'></ion-textarea>
 
   <ion-button type='submit'>Submit</ion-button>
 </form>

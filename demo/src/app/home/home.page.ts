@@ -22,7 +22,9 @@ export class HomePage implements OnInit {
     })
 
     this.key.savePublicKey().subscribe(response => {
-      this.pubkey = response
+      this.pubkey = response;
+      console.log(this.pubkey);
+      localStorage.setItem('publickey',this.pubkey)
     }, error => {});
   }
 
@@ -42,7 +44,7 @@ export class HomePage implements OnInit {
 
     //extracts public key
     var publicKey = forge.pki.publicKeyFromPem(pubkey);
-
+    console.log('This is the gotten public key:'+ publicKey);
     return publicKey;
   }
 
@@ -50,7 +52,7 @@ export class HomePage implements OnInit {
 
   encryptUserMessage(message) {
     //messaage.target.value
-    var secretMessage = "Hello World";
+    var secretMessage = message;
     //encode message to bytes
     secretMessage = forge.util.encodeUtf8(secretMessage);
 
@@ -64,15 +66,23 @@ export class HomePage implements OnInit {
     var base64 = forge.util.encode64(encrypted);
 
     var encryptedMessage = base64;
-
+    console.log( encryptedMessage);
+    return encryptedMessage;
     // writes base64 encrypted message to txt file
-    fs.writeFileSync('C:/Users/USER/Desktop/encrpytionTests/encryption/message.txt', encryptedMessage);
+    // fs.writeFileSync('C:/Users/USER/Desktop/encrpytionTests/encryption/message.txt', encryptedMessage);
 
   }
 
 
   onSubmit(){
     console.log(this.message.controls.message.value);
+    var userMessage = this.message.controls.message.value;
+    var encryptedUserMessage = this.encryptUserMessage(userMessage);
+    var json = {'message': encryptedUserMessage};
+    var message = JSON.stringify(json);
+
+    console.log(message);
+    this.key.returnUserMessage(message);
   }
 
 
