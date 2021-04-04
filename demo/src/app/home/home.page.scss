@@ -1,4 +1,25 @@
-ion-textarea{
+ion-input{
   border: 2px solid white ;
   --border-radius: 10px;
+}
+
+
+.page-title{
+  font-family: 'Zilla Slab Highlight', cursive;
+  color: #004986;
+}
+
+.branding{
+  float: right;
+}
+
+.sn-icon{
+  width: 57px;
+}
+
+
+.message-form{
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
 }

@@ -1,18 +1,55 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab+Highlight:wght@700&display=swap" rel="stylesheet">
+
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      SWARNet Message Board
+      <ion-item class="branding"><img class="sn-icon" src="../../assets/swarnet.png"> <span
+          class="page-title">SWARNet</span></ion-item>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<form  [formGroup]='message' (ngSubmit)='onSubmit()'>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Diego Martin</ion-card-subtitle>
+      <ion-card-title>Flooding</ion-card-title>
+    </ion-card-header>
+    <!-- <ion-card-content>
+      Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
+    </ion-card-content> -->
+  </ion-card>
 
+  <div *ngIf="checkArrayLength()">
 
-  <ion-textarea formControlName='message'></ion-textarea>
+    <div>
+      <!-- <li >
+        <ul> -->
+      <!-- {{comment.user}}
+          {{comment.message}} -->
+      <ion-card *ngFor="let comment of comments">
+        <ion-card-header>
+          <ion-card-subtitle style="font-weight: bolder;">{{comment.user}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          {{comment.message}}
+        </ion-card-content>
+      </ion-card>
+      <!-- </ul>
+      </li> -->
 
-  <ion-button type='submit'>Submit</ion-button>
-</form>
+    </div>
+  </div>
+
+      <form [formGroup]="message" class="message-form" (ngSubmit)='onSubmit()'>
+        <ion-item class="message-input-container">
+          <ion-input type="text" formControlName='message' placeholder="Enter message here"></ion-input>
+          <ion-button type='submit'>
+            <ion-icon name="send-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+      </form>
 
 </ion-content>
