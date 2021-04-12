@@ -1,0 +1,8 @@
+
+**/__pycache__/
+**.pyc
+
+App/config.py
+App/test.db
+
+node_modules/
