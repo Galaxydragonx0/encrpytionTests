@@ -2,7 +2,7 @@ var forge = require('node-forge');
 const fs = require('fs');
 
 
-/*
+
 
 //SERVER -> CLIENT -> SERVER  ENCRYPTION/DECRYPTION
 
@@ -28,7 +28,7 @@ var encryptedMessage = base64;
 
 // writes base64 encrypted message to txt file
 fs.writeFileSync('C:/Users/USER/Desktop/encrpytionTests/encryption/message.txt', encryptedMessage);
-*/
+
 
 
 
@@ -47,7 +47,7 @@ var clientPrivateKey = keys.privateKey;
 // saves public and private keys to pem 
 fs.writeFileSync("C:/Users/USER/Desktop/encrpytionTests/encryption/clientpublickey.pem",forge.pki.publicKeyToPem(clientPublicKey),'utf8');
 fs.writeFileSync("C:/Users/USER/Desktop/encrpytionTests/encryption/clientprivatekey.pem",forge.pki.privateKeyToPem(clientPrivateKey),'utf8')
-*/
+
 
 
 //READ THE PRIVATE KEY 
@@ -73,3 +73,4 @@ var serverMessage = forge.util.decodeUtf8(privateKey.decrypt(encryptedMessage, '
 
 console.log("this is the final message:" + serverMessage);
 
+*/
