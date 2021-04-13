@@ -16,6 +16,10 @@ encrypt = CryptoService()
 global key
 key = encrypt.generateKeys()
 
+@app.route('/')
+def index():
+    return "<h1>Welcome to our server !!</h1>"
+
 @app.route('/api/publickey')
 def index():
 

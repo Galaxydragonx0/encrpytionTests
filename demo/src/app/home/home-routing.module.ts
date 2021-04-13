@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePage } from './home.page';
 

@@ -1,7 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6f50c038-e274-4b0e-845c-b4feddc827f3" name="Default Changelist" comment="" />
+    <list default="true" id="6f50c038-e274-4b0e-845c-b4feddc827f3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/.browserslistrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/angular.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/capacitor.config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/e2e/protractor.conf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/e2e/src/app.e2e-spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/e2e/src/app.po.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/e2e/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/ionic.config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/karma.conf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/app/app-routing.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/app/app.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/app/app.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/app/app.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/app/app.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/app/app.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/app/home/home-routing.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/app/home/home.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/app/home/home.page.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/app/home/home.page.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/app/home/home.page.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/app/home/home.page.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/app/models/comments-model.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/app/services/messaging.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/app/services/messaging.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/assets/icon/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/assets/icon/favicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/assets/shapes.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/assets/swarnet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/environments/environment.prod.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/environments/environment.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/global.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/main.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/polyfills.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/test.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/theme/variables.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/src/zone-flags.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/tsconfig.app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/tsconfig.spec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Angular Encryption Demo/tslint.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EncryptionController.py" beforeDir="false" afterPath="$PROJECT_DIR$/EncryptionController.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/privatekey.pem" beforeDir="false" afterPath="$PROJECT_DIR$/privatekey.pem" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,9 +65,14 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1qPHUF9FEIrW9fIQDTZk5IlYXom" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -72,5 +127,16 @@
       <updated>1616974319519</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
